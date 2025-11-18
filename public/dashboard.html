@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard – Sunkissed Beauty</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        background: linear-gradient(to bottom, #ffe4e6, #ffffff);
+      }
+    </style>
+  </head>
+
+  <body onload="checkLogin()" class="min-h-screen flex flex-col text-gray-800">
+    <header class="w-full bg-white/70 backdrop-blur-md shadow-md">
+      <div
+        class="max-w-6xl mx-auto flex items-center justify-between py-4 px-6"
+      >
+        <img
+          src="../assets/img/logo.png"
+          alt="Sunkissed Beauty Logo"
+          class="h-12 w-auto"
+        />
+
+        <button
+          onclick="logout()"
+          class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-full shadow-md text-sm font-medium transition"
+        >
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      <section class="max-w-6xl mx-auto px-6 py-10">
+        <div
+          class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-rose-100 p-6 mb-8"
+        >
+          <h2
+            id="welcomeText"
+            class="text-2xl md:text-3xl font-semibold text-rose-700 mb-2"
+          ></h2>
+          <p class="text-gray-700">
+            Here’s a curated selection of products picked just for you. Glow
+            time, darling ✨
+          </p>
+        </div>
+
+        <!-- Products Section -->
+        <div
+          class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-rose-100 p-6"
+        >
+          <h3 class="text-xl font-semibold text-rose-700 mb-6">
+            Featured Makeup Products
+          </h3>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          >
+            <div
+              class="bg-white rounded-xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-md transition"
+            >
+              <img
+                src="../assets/img/products/lipstick.png"
+                class="w-24 h-24 object-cover rounded-lg mb-3"
+                alt="Lipstick"
+              />
+              <h4 class="text-sm font-medium text-gray-800">
+                Velvet Kiss Lipstick
+              </h4>
+              <p class="text-rose-600 font-semibold mt-1 mb-3">₱299</p>
+              <button
+                onclick="openModal('Velvet Kiss Lipstick')"
+                class="bg-rose-500 hover:bg-rose-600 text-white text-sm px-4 py-2 rounded-full shadow transition flex items-center gap-2"
+              >
+              Buy Now
+              </button>
+            </div>
+
+            <div
+              class="bg-white rounded-xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-md transition"
+            >
+              <img
+                src="../assets/img/products/sunscreen.png"
+                class="w-24 h-24 object-cover rounded-lg mb-3"
+                alt="Sunscreen"
+              />
+              <h4 class="text-sm font-medium text-gray-800">
+                Glow Mist Sunscreen
+              </h4>
+              <p class="text-rose-600 font-semibold mt-1 mb-3">₱450</p>
+              <button
+                onclick="openModal('Glow Mist Sunscreen')"
+                class="bg-rose-500 hover:bg-rose-600 text-white text-sm px-4 py-2 rounded-full shadow transition flex items-center gap-2"
+              >
+               Buy Now
+              </button>
+            </div>
+            <div
+              class="bg-white rounded-xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-md transition"
+            >
+              <img
+                src="../assets/img/products/highlighter.png"
+                class="w-24 h-24 object-cover rounded-lg mb-3"
+                alt="Highlighter"
+              />
+              <h4 class="text-sm font-medium text-gray-800">
+                Starlit Highlighter
+              </h4>
+              <p class="text-rose-600 font-semibold mt-1 mb-3">₱370</p>
+              <button
+                onclick="openModal('Starlit Highlighter')"
+                class="bg-rose-500 hover:bg-rose-600 text-white text-sm px-4 py-2 rounded-full shadow transition flex items-center gap-2"
+              >
+               Buy Now
+              </button>
+            </div>
+
+            <div
+              class="bg-white rounded-xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-md transition"
+            >
+              <img
+                src="../assets/img/products/foundation.png"
+                class="w-24 h-24 object-cover rounded-lg mb-3"
+                alt="Foundation"
+              />
+              <h4 class="text-sm font-medium text-gray-800">
+                PerfectSkin Foundation
+              </h4>
+              <p class="text-rose-600 font-semibold mt-1 mb-3">₱599</p>
+              <button
+                onclick="openModal('PerfectSkin Foundation')"
+                class="bg-rose-500 hover:bg-rose-600 text-white text-sm px-4 py-2 rounded-full shadow transition flex items-center gap-2"
+              >
+               Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div
+        id="purchaseModal"
+        class="fixed inset-0 bg-black/40 flex items-center justify-center px-4 hidden z-50"
+        onclick="overlayClick(event)"
+      >
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 relative">
+          <button
+            class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-xl"
+            onclick="closeModal()"
+          >
+            &times;
+          </button>
+
+          <h3 class="text-xl font-semibold text-rose-700 mb-2">
+            Purchase Successful ✨
+          </h3>
+          <p class="text-gray-700 mb-4">
+            Thank you for buying
+            <span
+              id="modalProductName"
+              class="font-semibold text-rose-600"
+            ></span
+            >!
+          </p>
+
+          <button
+            class="w-full bg-rose-500 hover:bg-rose-600 text-white font-medium py-2 rounded-full mt-2"
+            onclick="closeModal()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 text-center py-4 mt-10">
+      <p>© 2025 Sunkissed Beauty by Sage Anne Acol — All Rights Reserved</p>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+
+    <script>
+      function openModal(productName) {
+        const modal = document.getElementById("purchaseModal");
+        const nameSpan = document.getElementById("modalProductName");
+
+        nameSpan.textContent = productName;
+        modal.classList.remove("hidden");
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("purchaseModal");
+        modal.classList.add("hidden");
+      }
+
+      function overlayClick(event) {
+        if (event.target.id === "purchaseModal") {
+          closeModal();
+        }
+      }
+    </script>
+  </body>
+</html>
