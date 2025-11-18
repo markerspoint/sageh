@@ -1,7 +1,7 @@
 // Define page paths (from project root)
 const LOGIN_PAGE = "/auth/login.html";
 const SIGNUP_PAGE = "/auth/signup.html";
-const DASHBOARD_PAGE = "/public/dashboard.html";
+const DASHBOARD_PAGE = "/pages/dashboard.html";
 
 function signup() {
   let name = document.getElementById("name").value;
